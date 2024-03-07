@@ -16,9 +16,9 @@ def iss_over_head():
     data = responses.json()
     longitude = float(data["iss_position"]["longitude"])
     latitude = float(data["iss_position"]["latitude"])
-    if (longitude >= MY_LNG - 5 and longitude <= MY_LNG + 5) and (latitude >= MY_LAT - 5 and latitude <= MY_LAT + 5):
-        return True
-    return False
+    # if (longitude >= MY_LNG - 5 and longitude <= MY_LNG + 5) and (latitude >= MY_LAT - 5 and latitude <= MY_LAT + 5):
+    #    return True
+    return True
 # longitude and latitude can address a position on the earth.
 # use this: https://www.latlong.net/Show-Latitude-Longitude.html
 
