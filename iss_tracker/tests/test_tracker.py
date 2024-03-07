@@ -1,5 +1,3 @@
-# tests/test_iss_tracker.py
-
 from tracker import iss_over_head, is_night
 
 def test_iss_over_head():
