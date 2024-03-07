@@ -1,4 +1,4 @@
-from tracker import iss_over_head, is_night
+from iss_tracker.tracker import iss_over_head, is_night
 
 def test_iss_over_head():
     result = iss_over_head()
