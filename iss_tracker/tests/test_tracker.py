@@ -1,6 +1,6 @@
 # tests/test_iss_tracker.py
 
-from iss_tracker import iss_over_head, is_night
+from tracker import iss_over_head, is_night
 
 def test_iss_over_head():
     result = iss_over_head()
