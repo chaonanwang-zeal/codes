@@ -23,3 +23,24 @@ jobs:
 
     - name: Run tests
       run: pytest 
+
+    #-- Teams通知 --#
+    # 成功
+    - name: 'Teams Notification on Success'
+      uses: 'thechetantalwar/teams-notify@8a78811f5e8f58cdd204efebd79158006428c46b'
+      if: ${{ success() }}
+      with:
+        # WebHook URL of your MS Teams Channel
+        teams_webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        # Message to be sent
+        message: 'No bug with your codes.'
+
+    # 失敗
+    - name: 'Teams Notification on Failure'
+      uses: 'thechetantalwar/teams-notify@8a78811f5e8f58cdd204efebd79158006428c46b'
+      if: ${{ failure() }}
+      with:
+        # WebHook URL of your MS Teams Channel
+        teams_webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        # Message to be sent
+        message: 'Some thing goes wrong.'
