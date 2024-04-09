@@ -29,14 +29,18 @@ jobs:
     - name: 'Teams Notification on Success'
       uses: 'thechetantalwar/teams-notify@8a78811f5e8f58cdd204efebd79158006428c46b'
       if: ${{ success() }}
-      run:
-          MESSAGE="Hello Team! This is an important message."
-          curl -X POST -H "Content-Type: application/json" -d "{\"@type\": \"MessageCard\",\"title\": \"GitHub Action Notification\",\"text\": \"$MESSAGE\",\"mentions\": [{\"mentionType\": \"users\",\"userMentions\": [{\"id\": \"all\"}]}]" ${{ secrets.TEAMS_WEBHOOK_URL }}
+      run: |
+        MESSAGE="Hello Team! This is an important message."
+        curl -X POST -H "Content-Type: application/json" -d "{\"@type\": \"MessageCard\",\"title\": \"GitHub Action Notification\",\"text\": \"$MESSAGE\",\"mentions\": [{\"mentionType\": \"users\",\"userMentions\": [{\"id\": \"all\"}]}]}" ${{ secrets.TEAMS_WEBHOOK_URL }}
+      env:
+        WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
 
     # 失敗
     - name: 'Teams Notification on Failure'
       uses: 'thechetantalwar/teams-notify@8a78811f5e8f58cdd204efebd79158006428c46b'
       if: ${{ failure() }}
-      run:
-          MESSAGE="Hello Team! This is an important message."
-          curl -X POST -H "Content-Type: application/json" -d "{\"@type\": \"MessageCard\",\"title\": \"GitHub Action Notification\",\"text\": \"$MESSAGE\",\"mentions\": [{\"mentionType\": \"users\",\"userMentions\": [{\"id\": \"all\"}]}]" ${{ secrets.TEAMS_WEBHOOK_URL }}
+      run: |
+        MESSAGE="Hello Team! This is an important message."
+        curl -X POST -H "Content-Type: application/json" -d "{\"@type\": \"MessageCard\",\"title\": \"GitHub Action Notification\",\"text\": \"$MESSAGE\",\"mentions\": [{\"mentionType\": \"users\",\"userMentions\": [{\"id\": \"all\"}]}]}" ${{ secrets.TEAMS_WEBHOOK_URL }}
+      env:
+        WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
