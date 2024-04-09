@@ -29,7 +29,7 @@ jobs:
     - name: 'Teams Notification on Success'
       if: ${{ success() }}
       run: |
-        MESSAGE=$(echo "Job Details: \nRepository: ${{ github.repository }}\nEvent path: ${{ github.event_path }}\nMessage: ${{ github.event.head_commit.message }}\nAuthor: ${{ github.event.head_commit.author.name }}\nTimestamp: ${{ github.event.head_commit.timestamp }}" | jq -R '. | gsub("\n", "\\n")')
+        MESSAGE="ジョブ詳細: ${{ github.repository }}でComposerのGCSへのデプロイは成功しました。　コミットメッセージ: ${{ github.event.head_commit.message }}。　作成者: ${{ github.event.head_commit.author.name }}　タイムスタンプ: ${{ github.event.head_commit.timestamp }}。"
         curl -X POST -H "Content-Type: application/json" -d "{\"@type\": \"MessageCard\",\"title\": \"デプロイ成功\",\"text\": \"$MESSAGE\"}" ${{ secrets.TEAMS_WEBHOOK_URL }}
       env:
         WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
