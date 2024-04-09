@@ -27,7 +27,7 @@ jobs:
     #-- Teams通知 --#
     # 成功
     - name: 'Teams Notification on Success'
-      if: ${{ success() }}
+      if: ${{ failure() }}
       run: |
         MESSAGE="Hello Team! This is an important message."
         curl -X POST -H "Content-Type: application/json" -d "{\"@type\": \"MessageCard\",\"title\": \"GitHub Action Notification\",\"text\": \"$MESSAGE\",\"mentions\": {\"mentionType\": \"users\",\"mentionTarget\": [\"all\"]}}" ${{ secrets.TEAMS_WEBHOOK_URL }}
@@ -36,9 +36,47 @@ jobs:
 
     # 失敗
     - name: 'Teams Notification on Failure'
-      if: ${{ failure() }}
+      if: ${{ success() }}
       run: |
         MESSAGE="Hello Team! This is an important message."
-        curl -X POST -H "Content-Type: application/json" -d "{\"@type\": \"MessageCard\",\"title\": \"GitHub Action Notification\",\"text\": \"$MESSAGE\",\"mentions\": {\"mentionType\": \"users\",\"mentionTarget\": [\"all\"]}}" ${{ secrets.TEAMS_WEBHOOK_URL }}
+        DATA={
+            "type": "message",
+            "attachments": [
+                {
+                "contentType": "application/vnd.microsoft.card.adaptive",
+                "content": {
+                    "type": "AdaptiveCard",
+                    "body": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Medium",
+                            "weight": "Bolder",
+                            "text": "Sample Adaptive Card with User Mention"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "Hi <at>Adele UPN</at>, <at>Adele Microsoft Entra ID</at>"
+                        }
+                    ],
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "version": "1.0",
+                    "msteams": {
+                        "entities": [
+                            {
+                                "type": "mention",
+                                "text": "<at>Adele UPN</at>",
+                                "mentioned": {
+                                  "id": "chaonan.wang@zdh.co.jp",
+                                  "name": "chaonan_wang"
+                                }
+                              }
+                        ]
+                    }
+                }
+            }]
+        }
+        curl -X POST -H "Content-Type: application/json" -d "$DATA" ${{ secrets.TEAMS_WEBHOOK_URL }}
       env:
         WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+
+
