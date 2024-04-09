@@ -30,7 +30,7 @@ jobs:
       if: ${{ success() }}
       run: |
         MESSAGE="Hello Team! This is an important message."
-        curl -X POST -H "Content-Type: application/json" -d "{\"@type\": \"MessageCard\",\"title\": \"GitHub Action Notification\",\"text\": \"$MESSAGE\",\"mentions\": [{\"mentionType\": \"users\",\"userMentions\": [{\"id\": \"all\"}]}]}" ${{ secrets.TEAMS_WEBHOOK_URL }}
+        curl -X POST -H "Content-Type: application/json" -d "{\"@type\": \"MessageCard\",\"title\": \"GitHub Action Notification\",\"text\": \"$MESSAGE\",\"mentions\": {\"mentionType\": \"users\",\"mentionTarget\": [\"all\"]}}" ${{ secrets.TEAMS_WEBHOOK_URL }}
       env:
         WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
 
@@ -39,6 +39,6 @@ jobs:
       if: ${{ failure() }}
       run: |
         MESSAGE="Hello Team! This is an important message."
-        curl -X POST -H "Content-Type: application/json" -d "{\"@type\": \"MessageCard\",\"title\": \"GitHub Action Notification\",\"text\": \"$MESSAGE\",\"mentions\": [{\"mentionType\": \"users\",\"userMentions\": [{\"id\": \"all\"}]}]}" ${{ secrets.TEAMS_WEBHOOK_URL }}
+        curl -X POST -H "Content-Type: application/json" -d "{\"@type\": \"MessageCard\",\"title\": \"GitHub Action Notification\",\"text\": \"$MESSAGE\",\"mentions\": {\"mentionType\": \"users\",\"mentionTarget\": [\"all\"]}}" ${{ secrets.TEAMS_WEBHOOK_URL }}
       env:
         WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
