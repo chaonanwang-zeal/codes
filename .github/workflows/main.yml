@@ -36,6 +36,7 @@ jobs:
 
     # 失敗
     - name: Run Python script
+      if: ${{ failure() }}
       run: python utils\utility_funcs.py
 
         
