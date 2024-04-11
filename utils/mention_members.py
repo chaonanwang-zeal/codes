@@ -3,5 +3,4 @@ MENTION_MEMBERS = [
 ]
 
 if __name__ == "__main__":
-
-    print(MENTION_MEMBERS)
+    print("[{}]".format(", ".join("'" + member + "'" for member in MENTION_MEMBERS)))
