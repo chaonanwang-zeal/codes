@@ -4,4 +4,4 @@ MENTION_MEMBERS = [
 
 if __name__ == "__main__":
 
-    print("MENTION_MEMBERS")
+    print(MENTION_MEMBERS)
