@@ -81,7 +81,7 @@ def notify_message(message, webhook_url):
     )
     print(f'response: {response}')
 
-def notify_job_error(job_name, webhook_url=MAIN_NOTIFICATION_TEAM_URL):
+def notify_job_error(job_name, webhook_url=MAIN_NOTIFICATION_WEBHOOK_URL):
     """
     JOBが失敗した場合の通知メッセージを作成する
     失敗した場合は運用メンバーへメンションする
