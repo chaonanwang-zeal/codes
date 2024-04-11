@@ -59,7 +59,7 @@ def notify_message(webhook_url, mention_members):
         webhook_url (string): teamsへの通知に利用するwebhookのURL
     """
     response = requests.post(
-        webhook_url=webhook_url,
+        webhook_url,
         json=_prep_job_error_message(mention_members),
     )
     print(f'response: {response}')
