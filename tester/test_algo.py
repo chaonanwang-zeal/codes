@@ -13,7 +13,7 @@ def test_findRedundantConnection():
 
     # Test case 3
     edges3 = [[1, 2], [2, 3], [3, 4], [4, 1], [1, 5]]
-    assert findRedundantConnection(edges3) == [4, 1]
+    assert findRedundantConnection(edges3) == [43, 1]
 
 
 if __name__ == "__main__":
