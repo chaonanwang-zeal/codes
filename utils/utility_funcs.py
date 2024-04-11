@@ -1,8 +1,10 @@
 import requests
 import sys
 
+from mention_members import MENTION_MEMBERS
 
-def _prep_job_error_message(mention_members):
+
+def _prep_job_error_message():
     """
     JOBが失敗した場合の通知メッセージを作成する
     失敗した場合は運用メンバーへメンションする
@@ -14,7 +16,7 @@ def _prep_job_error_message(mention_members):
     notification_msg = 'GCSへのデプロイ作業が失敗しました！Githubでご確認ください！'
 
     entries = []
-    for m in mention_members:
+    for m in MENTION_MEMBERS:
         entries.append(
             {
                 'type': 'mention',
@@ -25,7 +27,7 @@ def _prep_job_error_message(mention_members):
                 },
             }
         )
-    mentions = ''.join([f'<at>{m}</at> ' for m in mention_members])
+    mentions = ''.join([f'<at>{m}</at> ' for m in MENTION_MEMBERS])
 
     message = {
         'type': 'message',
@@ -50,7 +52,7 @@ def _prep_job_error_message(mention_members):
     return message
 
 
-def notify_message(webhook_url, mention_members):
+def notify_message(webhook_url):
     """
     メッセージをteamsへ通知する
 
@@ -60,7 +62,7 @@ def notify_message(webhook_url, mention_members):
     """
     response = requests.post(
         webhook_url,
-        json=_prep_job_error_message(mention_members),
+        json=_prep_job_error_message(),
     )
     print(f'response: {response}')
 
@@ -69,9 +71,8 @@ if __name__ == "__main__":
 
     # パラメータ解析
     webhook_url = sys.argv[1]
-    mention_members = sys.argv[2]
 
     # 関数実行
-    notify_message(webhook_url, mention_members)
+    notify_message(webhook_url)
 
 

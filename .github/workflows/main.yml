@@ -37,7 +37,7 @@ jobs:
     # 失敗
     - name: Run Python script
       if: ${{ failure() }}
-      run: python utils/utility_funcs.py ${{ secrets.TEAMS_WEBHOOK_URL }} ['chaonan.wang@avantcorp.com'] # $(python utils/mention_members.py)
+      run: python utils/utility_funcs.py ${{ secrets.TEAMS_WEBHOOK_URL }}
       env:
         WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
 
