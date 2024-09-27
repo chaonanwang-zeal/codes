@@ -1,4 +1,12 @@
 def findRedundantConnection(edges):
+    """add something for test!!
+
+    Args:
+        edges (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     par = [i for i in range(len(edges) + 1)]
     rank = [1] * (len(edges) + 1)
 
